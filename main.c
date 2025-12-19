@@ -1,52 +1,36 @@
 #include <stdio.h>
 #include "matrix_op.h"
 
-void print_matrix(const char* name, int mat[SIZE][SIZE]) {
-    printf("Matrix %s:\n", name);
-    for (int i = 0; i < SIZE; i++) {
-        printf("[ ");
-        for (int j = 0; j < SIZE; j++) printf("%4d ", mat[i][j]);
-        printf("]\n");
-    }
-    printf("\n");
-}
-
-
-void print_double_matrix(const char* name, double mat[SIZE][SIZE]) {
-    printf("Matrix %s (double):\n", name);
-    for (int i = 0; i < SIZE; i++) {
-        printf("[ ");
-        for (int j = 0; j < SIZE; j++) printf("%6.2f ", mat[i][j]);
-        printf("]\n");
-    }
-    printf("\n");
-}
-
 int main() {
-    int A[SIZE][SIZE] = { {1, 2, 3}, {0, 1, 4}, {5, 6, 0} }; 
-    int B[SIZE][SIZE] = { {9, 8, 7}, {6, 5, 4}, {3, 2, 1} };
-    int res[SIZE][SIZE];
-    double res_inv[SIZE][SIZE]; 
+    double A[SIZE][SIZE] = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
 
-    printf("Basic:\n");
-    matrix_add(A, B, res); print_matrix("Addition (A+B)", res);
-    matrix_sub(A, B, res); print_matrix("Subtraction (A-B)", res);
-    matrix_elementwise_mul(A, B, res); print_matrix("Element-wise Mul", res);
+    double B[SIZE][SIZE] = {
+        {9, 8, 7},
+        {6, 5, 4},
+        {3, 2, 1}
+    };
 
-    printf("Linear:\n");
-    matrix_mul(A, B, res); print_matrix("Matrix Mul (A*B)", res);
-    matrix_transpose(A, res); print_matrix("Transpose (A)", res);
+    double result[SIZE][SIZE];
 
-    printf("Advanced:\n");
-    int det = matrix_det(A);
-    printf("Determinant of A = %d\n\n", det);
-    
-    matrix_adjoint(A, res); print_matrix("Adjoint (A)", res);
+    printf("Addition:\n");
+    add_matrix(A, B, result);
+    print_matrix(result);
 
-    printf("Inverse:\n");
-    if (matrix_inverse(A, res_inv)) {
-        print_double_matrix("Inverse (A^-1)", res_inv);
-    }
+    printf("Subtraction:\n");
+    sub_matrix(A, B, result);
+    print_matrix(result);
+
+    printf("Multiplication:\n");
+    multiply_matrix(A, B, result);
+    print_matrix(result);
+
+    printf("Element-wise Multiplication:\n");
+    element_wise_multiply(A, B, result);
+    print_matrix(result);
 
     return 0;
 }
