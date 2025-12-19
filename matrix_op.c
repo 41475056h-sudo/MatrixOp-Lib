@@ -2,6 +2,19 @@
 #include <stdio.h>
 
 void matrix_add(const int matA[SIZE][SIZE], const int matB[SIZE][SIZE], int result[SIZE][SIZE]) {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            result[i][j] = 0;
+        }
+    }
+
+    for (int i = 0; i < SIZE; i++) {       
+        for (int j = 0; j < SIZE; j++) {   
+            for (int k = 0; k < SIZE; k++) { 
+                result[i][j] += matA[i][k] * matB[k][j];
+            }
+        }
+    }
 }
 
 void matrix_sub(const int matA[SIZE][SIZE], const int matB[SIZE][SIZE], int result[SIZE][SIZE]) {
